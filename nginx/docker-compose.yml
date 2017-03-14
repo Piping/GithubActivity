@@ -1,13 +1,19 @@
 version: '2'
 services:
   activity:
+    #dockerfile: ./activity/Dockerfile
     image: activity
 
-  ng:
-    ports:
-     - "8888:8888"
+  activity2:
+    #dockerfile: ./activity2/Dockerfile
+    image: activity2
+
+  proxy:
     image: ng
+    ports:
+     - "80:8888"
     links:
      - activity
+     - activity2
 
    

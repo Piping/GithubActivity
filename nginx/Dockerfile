@@ -7,7 +7,7 @@
 FROM ubuntu
 
 # File Author / Maintainer
-MAINTAINER Maintaner Name
+MAINTAINER Declan & Yian
 
 # Install Nginx
 
@@ -32,6 +32,9 @@ ADD nginx.conf /etc/nginx/
 
 # Append "daemon off;" to the beginning of the configuration
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+# Copy the hotswap file
+ADD swap.sh /swap.sh
 
 # Expose ports
 EXPOSE 8888
