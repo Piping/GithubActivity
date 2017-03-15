@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="activity">
-    <output-path>$PROJECT_DIR$/activity</output-path>
+    <output-path>$PROJECT_DIR$/HW4/activity</output-path>
     <root id="archive" name="activity.war">
       <element id="artifact" artifact-name="GithubActivity:war exploded" />
     </root>

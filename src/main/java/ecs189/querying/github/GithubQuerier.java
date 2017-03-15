@@ -46,22 +46,34 @@ public class GithubQuerier {
             System.out.println(commits);
             String hash = "";
             String msg="";
+            sb.append("<div class=\"table-responsive\">\n" +
+                    "  <table class=\"table table-hover table-striped\">\n");
+            sb.append("<thead>\n" +
+                    "      <tr>\n" +
+                    "        <th>SHA</th>\n" +
+                    "        <th>Commit Message</th>\n" +
+                    "      </tr>\n" +
+                    "    </thead>"+
+                    "<tbody>\n");
             for(int k =0; k< commits.length();k++){
                 JSONObject commit = commits.getJSONObject(k);
                 hash = commit.getString("sha");
                 msg = commit.getString("message");
                 // Add sha and message
-                sb.append("SHA: "+hash.substring(0,8));
-                sb.append("<br />");
-                sb.append("Commit Message: "+msg);
-                sb.append("<br />");
+                sb.append("<tr>\n" +
+                        "        <td>"+hash.substring(0,8)+"</td>\n" +
+                        "        <td>"+msg+"</td>\n" +
+                        " </tr>");
             }
+            sb.append("</tbody>");
+            sb.append("  </table>\n");
             // Add collapsible JSON textbox (don't worry about this for the homework; it's just a nice CSS thing I like)
             sb.append("<a data-toggle=\"collapse\" href=\"#event-" + i + "\">Detailed JSON Info</a>");
             sb.append("<div id=event-" + i + " class=\"collapse\" style=\"height: auto;\"> <pre>");
             sb.append(event.toString());
             sb.append("</pre> </div>");
         }
+        sb.append("</div>"+"<br> <br>");
         sb.append("</div>");
         return sb.toString();
     }
@@ -72,23 +84,25 @@ public class GithubQuerier {
 
         JSONArray events;
         int page = 1;
+        int j = 0;
         do {
             String url = BASE_URL + user + "/events?page="+page;
             System.out.println(url);
             JSONObject json = Util.queryAPI(new URL(url));
             //System.out.println(json);
             events = json.getJSONArray("root");
-            for (int i = 0; i < events.length() && i < 10; i++) {
+            for (int i = 0; i < events.length() && j < 10;i++ ) {
                 JSONObject single_event = events.getJSONObject(i);
                 //System.out.println(single_event.getString("type"));
                 if( single_event.getString("type").equals("PushEvent")){
                     eventList.add(single_event);
+                    j++;
                 }
             }
             System.out.println(eventList);
             //System.out.println(page);
             page += 1;
-        }while(events.length()!=0);
+        }while(events.length()!=0 && j < 10);
 
         return eventList;
     }

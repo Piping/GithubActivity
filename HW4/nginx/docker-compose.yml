@@ -1,0 +1,11 @@
+version: '2'
+services:
+  activity:
+    image: activity
+
+  proxy:
+    image: ng
+    ports:
+     - "80:8888"
+    links:
+     - activity

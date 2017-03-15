@@ -1,0 +1,26 @@
+# ECS 189 Final Project: Hot Swap Container
+
+## Usage
+
+- Setup:
+
+  ```bash
+   source runMe.sh && hwbuild && hwup 
+  ```
+
+- Swap:hw
+
+    ```bash
+    swap image_name
+    ```
+
+- Close:
+
+  ```bash
+  hwdown
+  ```
+
+## File Description
+
+
+    
