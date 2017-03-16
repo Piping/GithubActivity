@@ -19,6 +19,16 @@ function swap() {
     # ${variable name} $1 - the first argument: image_name
     docker_image_name=$1
 
+    if [ -z $(docker image ls --filter reference=$docker_image_name -q) ]; then
+        echo "Image '$docker_image_name' is not found! Try other Image Name"
+        return 1
+    fi
+
+    if [ $(docker ps -f name=ecs189_${docker_image_name}_1 -q) ]; then
+        echo "Replace the CURRENT RUNNING container of image: $docker_image_name"
+        docker rm -f $(docker ps -f name=ecs189_${docker_image_name}_1 -q)
+    fi
+
     new_container=$(docker run --network=ecs189_default --name=ecs189_${docker_image_name}_1 -d $docker_image_name)
 
     docker exec -it ecs189_proxy_1 bash /swap.sh ecs189_${docker_image_name}_1

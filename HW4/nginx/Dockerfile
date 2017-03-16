@@ -7,7 +7,7 @@
 FROM ubuntu
 
 # File Author / Maintainer
-MAINTAINER Declan & Yian
+MAINTAINER Declan & Yean
 
 # Install Nginx
 

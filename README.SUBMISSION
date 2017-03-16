@@ -11,7 +11,7 @@
 - Swap:hw
 
     ```bash
-    swap image_name
+    swap $image_name
     ```
 
 - Close:
@@ -22,5 +22,9 @@
 
 ## File Description
 
-
+  - runMe.sh : the file that contians command to build, run, swap, shutdown multiple docker instances
+  - nginx/swap.sh: the file that located in proxy container to help execute swap
+  - nginx/docker-compose.yml: the docker compose file that compose docker-network
+  - nginx/Dockerfile: the file to build new version of nginx container to support hot swap
+  - activity/activity.war: upadted java webpage app
     
